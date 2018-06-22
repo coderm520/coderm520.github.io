@@ -1,17 +1,15 @@
 ---
 layout:       post
-title:        "饿了么的 PWA 升级实践"
-subtitle:     "Upgrading Ele.me to Progressive Web App"
-date:         2017-07-12 12:00:00
-author:       "Hux"
+title:        "ELK安装记录"
+subtitle:     "linux下elk环境安装和部署"
+date:         2018-06-22 15:00:00
+author:       "coderm520"
 header-img:   "img/in-post/post-eleme-pwa/eleme-at-io.jpg"
 header-mask:  0.3
 catalog:      true
 multilingual: true
 tags:
-    - 前端开发
-    - JavaScript
-    - PWA
+    - ELK
 ---
 
 <!-- Chinese Version -->
