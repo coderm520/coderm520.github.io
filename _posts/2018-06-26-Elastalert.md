@@ -12,6 +12,8 @@ tags:
     - ELK
 ---
 
+- 创建index: $ elastalert-create-index
+
 - 创建一个rule
 
 >Each rule defines a query to perform, parameters on what triggers a match, and a list of alerts to fire for each match. We are going to use example_rules/example_frequency.yaml as a template:
@@ -43,6 +45,7 @@ email:
 - rules_folder：ElastAlert将从此文件夹加载规则配置文件，它试图在此文件夹中加载所有的yaml后缀文件。如果没有可用的规则，ElastAlert不会启动。如果文件夹中的文件发生变化，ElastAlert也会相应做出反应（如加载新规则、停止运行丢失的规则、重启有修改的规则等）。本教程中，我们使用example_rules文件夹
 
 >run_every is how often ElastAlert will query Elasticsearch
+
 - run_every: ElastAlert查询Elasticsearch的频率
 
 >buffer_time is the size of the query window, stretching backwards from the time each query is run. This value is ignored for rules where use_count_query or use_terms_query is set to true
@@ -90,6 +93,9 @@ As is, this rule means “Send an email to elastalert@example.com when there are
 - 所有配置文档都必须有timestamp(时间戳)字段。 ElastAlert默认会尝试使用@timestamp,
 但是这可以通过timestamp_field选项进行更改. 默认情况下，ElastAlert使用ISO8601时间戳，但通过设置timestamp_type支持unix时间戳
 这个规则的意思是“如果在4小时内有超过50个包含some_field == some_value的文档，发送电子邮件到elastalert@example.com。”
+
+ timestamp_field: "@timestamp"
+ timestamp_type: unix_ms
 
 ## 测试你的Rule
 
@@ -203,3 +209,38 @@ By using the --debug flag instead of --verbose, the body of email will instead b
 - 请注意，如果您停止ElastAlert并稍后再运行它，它将查找elastalert_status并在最后一次查询的结束时开始查询。这是为了防止在ElastAlert重新启动时重复或跳过警报
 通过使用--debug标志而不是--verbose，电子邮件的主体将被记录，并且电子邮件将不会被发送。另外，查询不会保存到elastalert_status
 
+- 邮件配置 
+    es_host: 192.168.137.101
+    es_port: 9200
+    name: my frequency rule
+    type: frequency
+    index: account*
+    num_events: 3
+    timeframe:
+        hours: 24
+
+    timestamp_type: unix_ms
+    timestamp_field: "@timestamp"
+
+    filter:
+        - query_string:
+            query: "number: >10"
+
+
+    alert:
+        - "email"
+
+    email:
+        - "xxxx@xingyuanauto.com"
+
+    smtp_ssl: true
+    smtp_host: smtp.163.com
+    smtp_port: 465
+    alert_text: "test elastalert to you"
+    smtp_auth_file: smtp_auth_file.yaml
+    from_addr: "miaoxxxx@163.com"
+
+
+- smtp_auth_file.yaml
+    user：xxxx
+    password: xxxx
