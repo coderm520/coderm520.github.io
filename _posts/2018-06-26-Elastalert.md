@@ -50,7 +50,7 @@ email:
 
 >buffer_time is the size of the query window, stretching backwards from the time each query is run. This value is ignored for rules where use_count_query or use_terms_query is set to true
 
-- buffer_time是查询窗口的大小，从每个查询运行的时间向后延伸。对于use_count_query或use_terms_query设置为true的规则，此值将被忽略
+- buffer_time是查询窗口的时间间隔，从每个查询运行的时间向前延伸。对于use_count_query或use_terms_query设置为true的规则，此值将被忽略
 
 
 http://elastalert.readthedocs.io/en/latest/running_elastalert.html#setting-up-elasticsearch   待添加
@@ -217,7 +217,7 @@ By using the --debug flag instead of --verbose, the body of email will instead b
     index: account*
     num_events: 3
     timeframe:
-        hours: 24
+        minutes: 10
 
     timestamp_type: unix_ms
     timestamp_field: "@timestamp"
@@ -244,3 +244,8 @@ By using the --debug flag instead of --verbose, the body of email will instead b
 - smtp_auth_file.yaml
     user：xxxx
     password: xxxx
+
+- 例：buffer_time:days 1, run_every:seconds:20,timeframe:minutes 10, num_events:3
+    每20秒（run_every）查询一次es，只查询从现在开始往后30分钟（例：buffer_time）的数据，10分钟内（timeframe：从当前查询执行时间点往前10分钟内）如果有满足条件数目（num_events）的查询（条件为filter），触发警报
+
+- ps：unix时间戳转换http://tool.chinaz.com/Tools/unixtime.aspx
