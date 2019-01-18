@@ -1,6 +1,6 @@
 # Site settings
 title: coderm520 Blog
-SEOTitle: coderm520的博客 | Hux Blog
+SEOTitle: coderm520的博客 | coderm520 Blog
 header-img: img/home-bg.jpg
 email: coderm520@gmail.com
 description: "coder ,c#,go | 这里是 @coderm520 的个人博客。"
@@ -59,7 +59,7 @@ ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "写写代码"
+sidebar-about-description: "写写代码1"
 sidebar-avatar: /img/avatar-hux.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 

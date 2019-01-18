@@ -95,7 +95,9 @@ As is, this rule means “Send an email to elastalert@example.com when there are
 这个规则的意思是“如果在4小时内有超过50个包含some_field == some_value的文档，发送电子邮件到elastalert@example.com。”
 
  timestamp_field: "@timestamp"
- timestamp_type: unix_ms
+ timestamp_type: unix_ms 
+
+ps:timestamp_field入库字段需匹配timestamp_type时间格式
 
 ## 测试你的Rule
 
@@ -210,6 +212,7 @@ By using the --debug flag instead of --verbose, the body of email will instead b
 通过使用--debug标志而不是--verbose，电子邮件的主体将被记录，并且电子邮件将不会被发送。另外，查询不会保存到elastalert_status
 
 - 邮件配置 
+`
     es_host: 192.168.137.101
     es_port: 9200
     name: my frequency rule
@@ -239,7 +242,7 @@ By using the --debug flag instead of --verbose, the body of email will instead b
     alert_text: "test elastalert to you"
     smtp_auth_file: smtp_auth_file.yaml
     from_addr: "miaoxxxx@163.com"
-
+`
 
 - smtp_auth_file.yaml
     user：xxxx
